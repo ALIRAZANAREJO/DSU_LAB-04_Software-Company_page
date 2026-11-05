@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AR Technologies | Software Support and Engineering</title>
+<meta name="description" content="AR Technologies provides software support, maintenance and engineering for teams that depend on reliable systems.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF8F8;--surface:#fff;--ink:#1B2A4A;--muted:#6B5546;--line:#E9DCD8;--gold:#B83B74;--on-gold:#fff;--err:#B3402F;--blue:#2F5FB8;--alt:#EEF4FD;--brown:#6B4A34}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111729;--surface:#1A2238;--ink:#EAF0FB;--muted:#CDB9AB;--line:#2C3552;--gold:#F28DB8;--on-gold:#1B1530;--err:#F08A78;--blue:#9DB9F2;--alt:#16203A}}
+:root[data-theme="dark"]{--bg:#111729;--surface:#1A2238;--ink:#EAF0FB;--muted:#CDB9AB;--line:#2C3552;--gold:#F28DB8;--on-gold:#1B1530;--err:#F08A78;--blue:#9DB9F2;--alt:#16203A}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font:400 1rem/1.65 "Public Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Spectral,Georgia,serif;line-height:1.15;font-weight:600}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.65rem;font:600 1.2rem Spectral,serif;text-decoration:none}
+.mark{display:grid;place-items:center;width:34px;height:34px;border:1.5px solid var(--gold);color:var(--gold);font:700 .85rem "Public Sans",sans-serif;border-radius:9px}
+nav ul{display:flex;gap:1.6rem;list-style:none;padding:0}
+nav a{display:inline-block;text-decoration:none;color:var(--muted);font-size:.93rem;padding:.35rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover,nav a[aria-current="true"]{color:var(--ink);border-color:var(--gold)}
+.tools{display:flex;gap:.6rem;align-items:center}
+.btn{display:inline-block;padding:.72rem 1.3rem;border:1px solid var(--gold);background:var(--gold);color:var(--on-gold);font-weight:600;font-size:.93rem;font-family:inherit;border-radius:10px;text-decoration:none;cursor:pointer;transition:filter .2s,background .2s}
+.btn:hover{filter:brightness(1.08)}
+.btn:not(.ghost){box-shadow:0 8px 18px -10px var(--gold)}
+.prog{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transform-origin:left}
+.btn:disabled{opacity:.6;cursor:progress}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--gold)}
+.btn.sm{padding:.5rem .9rem;font-weight:500}
+#menu{display:none}
+.hero{background:radial-gradient(600px 320px at 85% 8%,rgba(242,141,184,.3),transparent 70%),linear-gradient(135deg,#2551AD 0%,#4A80E0 100%);color:#EAF0FB;padding:5.5rem 0 5rem}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.2vw,3.7rem);letter-spacing:-.01em;color:#fff}
+.hero .lead{color:#EEF4FF;max-width:52ch;margin:1.3rem 0 2rem;font-size:1.08rem}
+.hero .actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero .btn{background:#F28DB8;border-color:#F28DB8;color:#1B1530}
+.hero .btn.ghost{background:transparent;border-color:rgba(255,255,255,.55);color:#EAF0FB}
+.desk{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:1.2rem 1.4rem}
+.desk h2{display:flex;justify-content:space-between;align-items:center;font:600 .95rem "Public Sans",sans-serif;color:#EEF4FF;padding-bottom:.8rem}
+.live{display:flex;align-items:center;gap:.45rem;font-size:.8rem;font-weight:500;color:#9AF0C4}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#9AF0C4;animation:pulse 2s infinite}
+.tk{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.95rem 0;border-top:1px solid rgba(255,255,255,.16);animation:in .6s both;animation-delay:calc(var(--i) * .18s + .2s)}
+.tk b{display:block;font-weight:600;color:#fff;font-size:.95rem}
+.tk small{color:#E1EBFF;font-size:.82rem}
+.chip{flex:none;font-size:.78rem;font-weight:600;padding:.15rem .6rem;border-radius:99px;border:1px solid currentColor}
+.ok{color:#9AF0C4}.wip{color:#FFC9E0}.new{color:#E2ECFF}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+@keyframes pulse{50%{opacity:.3}}
+.sec{padding:5.5rem 0}
+.sec.alt{background:var(--alt);border-block:1px solid var(--line)}
+.head{max-width:62ch;margin-bottom:3rem}
+.head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--blue)}
+.head h2::after{content:"";display:block;width:56px;height:3px;margin-top:.9rem;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:2px}
+.head p{color:var(--muted);margin-top:.8rem}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:start}
+.about p{color:var(--muted);max-width:62ch}
+.about p+p{margin-top:1rem}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stat{background:var(--surface);padding:1.6rem}
+.stat b{display:block;color:var(--blue);font:600 2.4rem/1.1 Spectral,serif}
+.stat span{color:var(--muted);font-size:.9rem}
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:0 4rem}
+.svc article{padding:1.6rem 0;border-top:1px solid var(--line)}
+.svc h3{font-size:1.25rem;margin-bottom:.4rem}
+.svc p{color:var(--muted)}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.filters button{font:500 .9rem "Public Sans",sans-serif;padding:.45rem 1rem;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;cursor:pointer;transition:all .2s}
+.filters button:hover{border-color:var(--gold);color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--bg)}
+#count{color:var(--muted);font-size:.85rem;margin-bottom:1.6rem}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.proj{display:flex;flex-direction:column;gap:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.6rem;transition:border-color .2s,transform .25s,box-shadow .25s}
+.proj:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 30px -16px color-mix(in srgb,var(--blue) 50%,transparent)}
+.proj[hidden]{display:none}
+.proj h3{font-size:1.3rem}
+.proj small{color:var(--muted);font-size:.85rem}
+.proj p{color:var(--muted);flex:1}
+.proj strong{display:block;margin-top:.6rem;padding-top:.8rem;border-top:1px solid var(--line);color:var(--gold);font-size:.92rem}
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.av{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:var(--brown);color:#F6C9DB;font:600 1.25rem Spectral,serif;margin-bottom:1rem}
+.team h3{font-size:1.2rem}
+.team em{display:block;font-style:normal;color:var(--gold);font-weight:500;font-size:.9rem;margin:.15rem 0 .5rem}
+.team p{color:var(--muted);font-size:.92rem}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;counter-reset:s}
+.steps li{counter-increment:s;border-top:2px solid var(--gold);padding-top:1rem}
+.steps li::before{content:counter(s);display:block;font:600 1.6rem Spectral,serif;color:var(--gold)}
+.steps h3{font-size:1.2rem;margin:.2rem 0 .4rem}
+.steps p{color:var(--muted);font-size:.95rem}
+.faq{max-width:760px}
+details{border-top:1px solid var(--line);padding:1.1rem 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font:600 1.1rem Spectral,serif;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:1.4rem;line-height:1;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin-top:.7rem;max-width:62ch}
+.contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem}
+.info dt{font-weight:600;margin-top:1.3rem}
+.info dd{color:var(--muted)}
+form{display:grid;gap:1rem;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.8rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{display:block;font-weight:500;font-size:.9rem;margin-bottom:.3rem}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
+[aria-invalid="true"]{border-color:var(--err)}
+textarea{min-height:130px;resize:vertical}
+.err{color:var(--err);font-size:.84rem;min-height:1.2em;margin-top:.2rem}
+#status{font-weight:500}
+#status.ok{color:#2E7D5B}
+#status.bad{color:var(--err)}
+footer{background:var(--brown);color:#EBDCD2;padding:2rem 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media (max-width:980px){.projects,.team,.steps{grid-template-columns:repeat(2,1fr)}.hero .grid,.about,.contact{grid-template-columns:1fr;gap:2.5rem}}
+@media (max-width:860px){
+ #menu{display:inline-block}
+ nav{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:1rem 1.25rem}
+ nav.open{display:block}
+ nav ul{flex-direction:column;gap:.4rem}
+}
+@media (max-width:640px){.projects,.team,.steps,.svc,.row{grid-template-columns:1fr}.tools .btn:not(.sm){display:none}.sec{padding:4rem 0}.hero{padding:4rem 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="prog" id="prog"></div>
+ <div class="wrap bar">
+  <a class="logo" href="#top" aria-label="AR Technologies home"><span class="mark">AR</span>AR Technologies</a>
+  <nav id="nav" aria-label="Primary">
+   <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+   </ul>
+  </nav>
+  <div class="tools">
+   <button class="btn ghost sm" id="theme" type="button" aria-pressed="false">Dark theme</button>
+   <a class="btn" href="#contact">Get support</a>
+   <button class="btn ghost sm" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </div>
+ </div>
+</header>
+
+<main>
+ <section class="hero" id="top">
+  <div class="wrap grid">
+   <div>
+    <h1>Software support that keeps your systems running.</h1>
+    <p class="lead">AR Technologies maintains, repairs and improves business software for teams that cannot afford downtime. One accountable partner, from the first ticket to the final release.</p>
+    <div class="actions">
+     <a class="btn" href="#contact">Talk to an engineer</a>
+     <a class="btn ghost" href="#projects">See our work</a>
+    </div>
+   </div>
+   <aside class="desk" aria-label="Example support queue">
+    <h2>Support desk <span class="live">Live queue</span></h2>
+    <div class="tk" style="--i:0"><div><b>Checkout timeout on mobile</b><small>Ticket 4821, first reply in 6 min</small></div><span class="chip ok">Resolved</span></div>
+    <div class="tk" style="--i:1"><div><b>Payroll export failing</b><small>Ticket 4822, first reply in 9 min</small></div><span class="chip wip">In progress</span></div>
+    <div class="tk" style="--i:2"><div><b>Single sign-on login loop</b><small>Ticket 4823, first reply in 4 min</small></div><span class="chip new">Triaged</span></div>
+   </aside>
+  </div>
+ </section>
+
+ <section class="sec" id="about">
+  <div class="wrap about">
+   <div>
+    <div class="head"><h2>Engineers who stay with your software after launch.</h2></div>
+    <p>We started AR Technologies because too many teams were left alone once a project shipped. Our engineers take ownership of live systems, answer quickly and fix the cause, not only the symptom.</p>
+    <p>Our clients range from growing startups to established companies. They choose us for clear communication, predictable pricing and code that is easy for the next developer to read.</p>
+   </div>
+   <div class="stats">
+    <div class="stat"><b data-count="12" data-suffix="+">12+</b><span>Years in operation</span></div>
+    <div class="stat"><b data-count="240" data-suffix="+">240+</b><span>Clients supported</span></div>
+    <div class="stat"><b data-count="99.9" data-dec="1" data-suffix="%">99.9%</b><span>Average uptime</span></div>
+    <div class="stat"><b data-count="15" data-suffix=" min">15 min</b><span>Median first response</span></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="sec alt" id="services">
+  <div class="wrap">
+   <div class="head"><h2>Services</h2><p>Support is our core work. Development, cloud and security services are built around it.</p></div>
+   <div class="svc">
+    <article><h3>Application support</h3><p>Round-the-clock incident response, bug triage and fixes for software already in production.</p></article>
+    <article><h3>Maintenance and upgrades</h3><p>Dependency updates, framework migrations and performance tuning on a planned schedule.</p></article>
+    <article><h3>Custom development</h3><p>Web and mobile applications built to your requirements, documented and tested.</p></article>
+    <article><h3>Cloud and DevOps</h3><p>Deployment pipelines, monitoring and infrastructure that scales with your traffic.</p></article>
+    <article><h3>Quality assurance</h3><p>Automated and manual testing that finds problems before your customers do.</p></article>
+    <article><h3>Security reviews</h3><p>Code and infrastructure audits with a prioritized list of fixes.</p></article>
+   </div>
+  </div>
+ </section>
+
+ <section class="sec" id="projects">
+  <div class="wrap">
+   <div class="head"><h2>Projects</h2><p>A selection of systems we have built, rescued or kept running.</p></div>
+   <div class="filters" id="filters" role="group" aria-label="Filter projects">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="web" aria-pressed="false">Web</button>
+    <button type="button" data-f="mobile" aria-pressed="false">Mobile</button>
+    <button type="button" data-f="cloud" aria-pressed="false">Cloud</button>
+    <button type="button" data-f="support" aria-pressed="false">Support</button>
+   </div>
+   <p id="count" aria-live="polite">Showing 6 projects</p>
+   <div class="projects">
+    <article class="proj" data-cat="web"><h3>Ledgerline Payments</h3><small>Fintech, web platform</small><p>A merchant portal rebuilt around fast, reliable checkout.</p><strong>38% fewer failed checkouts</strong></article>
+    <article class="proj" data-cat="mobile"><h3>Careway Patient App</h3><small>Healthcare, mobile app</small><p>Appointment booking and secure messaging for clinics.</p><strong>99.6% crash-free sessions</strong></article>
+    <article class="proj" data-cat="cloud"><h3>Northgate Logistics</h3><small>Logistics, cloud migration</small><p>Forty services moved to the cloud in stages.</p><strong>Zero downtime during migration</strong></article>
+    <article class="proj" data-cat="web"><h3>Brightpath Learning</h3><small>Education, web platform</small><p>Course delivery platform tuned for slow connections.</p><strong>Load time cut from 4.1s to 1.2s</strong></article>
+    <article class="proj" data-cat="support"><h3>Meridian Retail POS</h3><small>Retail, managed support</small><p>Ongoing support for point-of-sale software across 60 stores.</p><strong>Median resolution under 2 hours</strong></article>
+    <article class="proj" data-cat="mobile"><h3>Altus Fleet Tracker</h3><small>Logistics, mobile app</small><p>Live vehicle tracking and driver reporting.</p><strong>3,000 vehicles tracked in real time</strong></article>
+   </div>
+  </div>
+ </section>
+
+ <section class="sec alt" id="team">
+  <div class="wrap">
+   <div class="head"><h2>Team</h2><p>Senior engineers who answer your tickets themselves.</p></div>
+   <div class="team">
+    <article><div class="av" aria-hidden="true">AR</div><h3>Ayesha Rahman</h3><em>Founder and CEO</em><p>Leads strategy and client relationships with 15 years in enterprise software.</p></article>
+    <article><div class="av" aria-hidden="true">OR</div><h3>Omar Raza</h3><em>Head of Engineering</em><p>Owns architecture, code quality and delivery standards.</p></article>
+    <article><div class="av" aria-hidden="true">SI</div><h3>Sana Iqbal</h3><em>Support Lead</em><p>Runs the support desk and incident response rotation.</p></article>
+    <article><div class="av" aria-hidden="true">HA</div><h3>Hamza Ali</h3><em>Cloud Architect</em><p>Designs infrastructure that stays fast and affordable.</p></article>
+   </div>
+  </div>
+ </section>
+
+ <section class="sec" id="process">
+  <div class="wrap">
+   <div class="head"><h2>How we work</h2><p>A simple path from first conversation to steady support.</p></div>
+   <ol class="steps">
+    <li><h3>Discover</h3><p>We review your software, your incidents and your goals.</p></li>
+    <li><h3>Plan</h3><p>You receive a scoped plan with clear timelines and pricing.</p></li>
+    <li><h3>Deliver</h3><p>We fix, build and test, with updates at every milestone.</p></li>
+    <li><h3>Support</h3><p>We monitor, respond and improve under an agreed service level.</p></li>
+   </ol>
+  </div>
+ </section>
+
+ <section class="sec alt" id="faq">
+  <div class="wrap">
+   <div class="head"><h2>Questions</h2></div>
+   <div class="faq">
+    <details><summary>Can you support software you did not build?</summary><p>Yes. Most of our support clients come to us with existing systems. We begin with a code and infrastructure review.</p></details>
+    <details><summary>What response times do you offer?</summary><p>Critical issues receive a reply within 15 minutes on our standard plan. Other priorities are set in your service agreement.</p></details>
+    <details><summary>How is support priced?</summary><p>Monthly plans based on coverage hours and response targets, or fixed quotes for one-off projects.</p></details>
+   </div>
+  </div>
+ </section>
+
+ <section class="sec" id="contact">
+  <div class="wrap contact">
+   <div>
+    <div class="head"><h2>Contact</h2><p>Describe your software and what needs attention. An engineer will reply within one business day.</p></div>
+    <dl class="info">
+     <dt>Email</dt><dd><a href="mailto:hello@artechnologies.com">hello@artechnologies.com</a></dd>
+     <dt>Phone</dt><dd><a href="tel:+920000000000">+92 000 0000000</a></dd>
+     <dt>Support hours</dt><dd>Monday to Saturday, 9:00 to 18:00 (24/7 for critical plans)</dd>
+    </dl>
+   </div>
+   <form id="contact-form" novalidate>
+    <div class="row">
+     <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" aria-describedby="err-name" required><p class="err" id="err-name"></p></div>
+     <div><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" aria-describedby="err-email" required><p class="err" id="err-email"></p></div>
+    </div>
+    <div><label for="topic">Topic</label><select id="topic" name="topic"><option>Software support</option><option>Maintenance and upgrades</option><option>Custom development</option><option>Cloud and DevOps</option><option>Something else</option></select></div>
+    <div><label for="message">Message</label><textarea id="message" name="message" aria-describedby="err-message" required></textarea><p class="err" id="err-message"></p></div>
+    <button class="btn" id="send" type="submit">Send message</button>
+    <p id="status" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap"><span>&copy; <span id="yr">2026</span> AR Technologies. All rights reserved.</span><span>Software support and engineering</span></div>
+</footer>
+
+<script type="module">
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ENDPOINT = ''; // Set to your API route, e.g. '/api/contact'. Empty simulates a successful send.
+
+/* Theme */
+const root = document.documentElement;
+const store = {
+  get: k => { try { return localStorage.getItem(k); } catch { return null; } },
+  set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage unavailable */ } }
+};
+const themeBtn = $('#theme');
+const applyTheme = t => {
+  root.dataset.theme = t;
+  themeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+  themeBtn.textContent = t === 'dark' ? 'Light theme' : 'Dark theme';
+};
+applyTheme(store.get('ar-theme') ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+themeBtn.addEventListener('click', () => {
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  store.set('ar-theme', next);
+});
+
+/* Mobile menu */
+const nav = $('#nav'), menu = $('#menu');
+const setMenu = open => {
+  nav.classList.toggle('open', open);
+  menu.setAttribute('aria-expanded', String(open));
+};
+menu.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
+nav.addEventListener('click', e => e.target.closest('a') && setMenu(false));
+addEventListener('keydown', e => e.key === 'Escape' && setMenu(false));
+
+/* Scroll spy */
+const links = new Map($$('nav a[href^="#"]').map(a => [a.hash.slice(1), a]));
+const spy = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    links.forEach(l => l.removeAttribute('aria-current'));
+    links.get(e.target.id)?.setAttribute('aria-current', 'true');
+  }
+}, { rootMargin: '-45% 0px -50% 0px' });
+$$('main section[id]').forEach(s => spy.observe(s));
+
+/* Animated counters */
+const ease = t => 1 - (1 - t) ** 3;
+const run = el => {
+  const end = Number(el.dataset.count), dec = Number(el.dataset.dec ?? 0), suf = el.dataset.suffix ?? '', t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / 1200, 1);
+    el.textContent = (end * ease(p)).toFixed(dec) + suf;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+if (!reduce) {
+  const io = new IntersectionObserver((entries, o) => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    run(e.target);
+    o.unobserve(e.target);
+  }), { threshold: 0.6 });
+  $$('[data-count]').forEach(c => { c.textContent = '0' + (c.dataset.suffix ?? ''); io.observe(c); });
+}
+
+/* Project filter */
+const cards = $$('.proj'), count = $('#count'), filterBtns = $$('#filters button');
+$('#filters').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  filterBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  let n = 0;
+  for (const c of cards) {
+    const show = b.dataset.f === 'all' || c.dataset.cat === b.dataset.f;
+    c.hidden = !show;
+    if (show) n++;
+  }
+  count.textContent = `Showing ${n} project${n === 1 ? '' : 's'}`;
+});
+
+/* Contact form */
+const form = $('#contact-form'), status = $('#status'), send = $('#send');
+const rules = {
+  name: v => v.trim().length >= 2 || 'Enter your full name.',
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Enter a valid email address.',
+  message: v => v.trim().length >= 20 || 'Add a little more detail (at least 20 characters).'
+};
+const fields = Object.keys(rules).map(n => form.elements[n]);
+const check = f => {
+  const res = rules[f.name](f.value), bad = res !== true;
+  f.setAttribute('aria-invalid', String(bad));
+  $(`#err-${f.name}`).textContent = bad ? res : '';
+  return !bad;
+};
+fields.forEach(f => {
+  f.addEventListener('blur', () => check(f));
+  f.addEventListener('input', () => f.getAttribute('aria-invalid') === 'true' && check(f));
+});
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  status.className = '';
+  status.textContent = '';
+  const results = fields.map(check);
+  if (results.includes(false)) { fields[results.indexOf(false)].focus(); return; }
+  send.disabled = true;
+  send.textContent = 'Sending…';
+  try {
+    const data = Object.fromEntries(new FormData(form));
+    if (ENDPOINT) {
+      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      if (!r.ok) throw new Error(`Request failed: ${r.status}`);
+    } else {
+      await new Promise(r => setTimeout(r, 700));
+    }
+    status.className = 'ok';
+    status.textContent = `Thank you, ${data.name.trim()}. We’ll reply within one business day.`;
+    form.reset();
+  } catch {
+    status.className = 'bad';
+    status.textContent = 'Your message was not sent. Check your connection and try again, or email hello@artechnologies.com.';
+  } finally {
+    send.disabled = false;
+    send.textContent = 'Send message';
+  }
+});
+
+/* Scroll progress */
+const prog = $('#prog');
+let ticking = false;
+addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+    ticking = false;
+  });
+}, { passive: true });
+
+$('#yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
